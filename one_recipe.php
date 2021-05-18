@@ -1,3 +1,8 @@
+<?php
+ session_start();
+ include "config.php";
+?>
+
 <!doctype html>
 <html>
 <head> 
@@ -18,32 +23,119 @@
     }
     </script>
 
-    <div id="recipeBox">
-        <img id="recipeImg" src="img/food.jpeg">
-        <h3>Heading of recipe</h3>
+    <?php
 
-        <div id="instructionsBox">
-            <p id="ingredientsDiv">
-                1 dl milk<br>
-                2 cl oil<br>
-                2 cl oil<br>
-                2 cl oil<br>
-                2 cl oil<br>
-            </p>
-            <p id="instructionsDiv">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta 
-                sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia 
-                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui 
-                dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora 
-                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum 
-                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem 
-                vel eum iure reprehenderit qui in ea voluptate velit
-                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-            </p>
-        </div>
+        if ($_GET['id']) {
+            $recipeId = $_GET['id'];
+        } else if ($_GET['ida']) {
+            $recipeId = $_GET['ida'];
+        }
+
+    ?>
+
+    <div id="recipeBox">
+
+    <?php
+
+        if ($_GET['id']) {
+
+            $query = "SELECT * FROM `recipes` WHERE `recipeId` = $recipeId";
+
+            $stmt = $db->prepare($query);
+            $stmt->bind_result($id, $title, $ingredients, $instructions, $img, $authorId);
+            $stmt->execute();
+
+            while($stmt->fetch()) {
+
+                echo "<img id='recipeImg' src='recipeImg/$img'>";
+                echo "<h3>$Title</h3>";
+
+                echo "<div id='instructionsBox'>";
+                    echo "<p id='ingredientsDiv'>";
+                        echo nl2br($ingredients);
+                    echo "</p>";
+                    echo "<p id='instructionsDiv'>";
+                        echo nl2br($instructions);
+                    echo "</p>";
+                echo "</div>";
+
+            }
+
+            $stmt->close();
+
+        }
+    ?>
+
+<?php
+
+if ($_GET['ida']) {
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "https://tasty.p.rapidapi.com/recipes/detail?id=$recipeId",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => [
+            "x-rapidapi-host: tasty.p.rapidapi.com",
+            "x-rapidapi-key: 75e932243fmshedc0c556d804bd0p11e5f6jsn391573816b46"
+        ],
+    ]);
+
+    $response = curl_exec($curl);
+    $jsonArrayResponse = json_decode($response, true);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+        echo "cURL Error #:" . $err;
+    } else {
+
+        $imgName = $jsonArrayResponse[thumbnail_url];
+        $recipeTitle = $jsonArrayResponse[name];
+
+        echo "<img id='recipeImg' src='$imgName'>";
+        echo "<h3>$recipeTitle</h3>";
+
+        echo "<div id='instructionsBox'>";
+            echo "<p id='ingredientsDiv'>";
+                foreach($jsonArrayResponse[sections] as $i) {
+                    foreach($i[components] as $a) {
+                        echo $a[raw_text];
+                        echo "<br>";
+                    }
+                }
+            echo "</p>";
+            echo "<p id='instructionsDiv'>";
+                foreach ($jsonArrayResponse[instructions] as $i) {
+                    echo $i[display_text];
+                    echo '<br>';
+                }
+            echo "</p>";
+        echo "</div>";
+
+    }  
+}
+
+?>
         <div id="recipeButton">
-        <button id="saveRecipe">SAVE RECIPE</button>
+            <form action="includes/saveRecipe.php" method="POST">
+                <?php
+                    if ($_GET['id']) {
+                        echo "<input type='hidden' name='id' value='$recipeId'>";
+                    } else if ($_GET['ida']) {
+                        echo "<input type='hidden' name='ida' value='$recipeId'>";
+                    }
+                ?>
+                
+                <input id="saveRecipe" name="saveBtn" type="submit" value="SAVE RECIPE">
+            </form>
         </div>
     </div>
 
