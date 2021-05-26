@@ -71,7 +71,7 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "x-rapidapi-host: tasty.p.rapidapi.com",
-                "x-rapidapi-key: 75e932243fmshedc0c556d804bd0p11e5f6jsn391573816b46"
+                "x-rapidapi-key: 6f7a6ca1f5msh18ba73f4a1cfd25p1257abjsn6a34745a13f4"
             ],
         ]);
     
