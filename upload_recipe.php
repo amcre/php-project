@@ -1,3 +1,7 @@
+<?php
+include "header.php";
+include "config.php";
+?>
 <!doctype html>
 <html>
 <head> 
@@ -5,10 +9,6 @@
  <meta charset="utf-8" /> 
  <link rel="stylesheet" tyles="text/css" media="screen" href="css/style.css">
 </head> 
-<script>
-
-
-</script>
   <body>
     <div id="uploadDiv">
         <h2>Upload a recipe of your<br>own for others to try out!</h2>
@@ -17,10 +17,10 @@
           <input type="text" id="title" name="title" placeholder=""><br><br>
           
           <label class="label" for="ingredients"><b>INGREDIENTS:</b></label><br>
-          <textarea class="input" type="text" id="ingredients" name="ingredients" placeholder=""></textarea><br><br>
+          <input class="input" type="text" id="ingredients" name="ingredients" placeholder=""><br><br>
 
           <label class="label" for="instructions"><b>INSTRUCTIONS:</b></label><br>
-          <textarea class="input" id="instructions" type="text" name="instructions" placeholder="" ></textarea><br>
+          <input class="input" id="instructions" type="text" name="instructions" placeholder="" ><br>
 
           <label class="label" for="image"><b>IMAGE:</b></label><br>
           <input class="input" id="image" type="file" name="image">
@@ -41,21 +41,11 @@
 
 } */
 
-
 ?>
 
-<!-- <script>
-function myFunction(event) {
-  var x = event.which || event.keyCode;
-  if (x == 13) {
-    event.preventDefault();
-    var test = document.querySelector('#ingredients');
-    test.value = test.value + '\n';
-    console.log(test.value);
-  }
-  
-}
-</script> -->
 
   </body>
 </html>
+<?php
+include "footer.php";
+?>
