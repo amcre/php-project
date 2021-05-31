@@ -1,4 +1,5 @@
 <?php
+ini_set('session.cookie_httponly', true);
  session_start();
  $day = new DateTime('+1 day');
  setcookie('PHPSESSID', session_id(), $day->getTimeStamp(), '/', null, null, true);
