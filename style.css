@@ -1,0 +1,395 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 1280px;
+    margin: auto;
+}
+
+/*HOMEPAGE*/
+.homeDiv {
+    color: #e76f51;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.homeBox {
+    color: #e76f51;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.homeBox h1 {
+    font-size: 40px;
+    margin: 5px;
+    margin-top: 20px;
+}
+.homeBox h2 {
+    font-size: 35px;
+    margin: 0;
+}
+.toLogin {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.toLogin a{
+    color: white;
+}
+.homeBox1 {
+    width: 1280px;
+    display: block;
+}
+#food1 {
+    width: 600px;
+    float: right;
+    display: inline;
+}
+#food2 {
+    width: 600px;
+}
+.homeBox3 {
+    margin-bottom: 70px;
+    margin-top: 50px;
+    margin-left: 100px;
+
+}
+ #food4 , #food5 , #food6 {
+     width: 33%;
+ }
+ .homeBox5 {
+     text-align: right;
+     margin-bottom: 70px;
+     margin-top: 50px;
+     margin-right: 100px;
+ }
+
+/*HEADER*/
+#header {
+    
+    overflow: hidden;
+    height: 100px;
+}
+
+#headertext {
+    margin: 0;
+    padding: 0;
+    float: left;
+    font-size: 40px;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+#navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+    display: block;
+}
+
+.navItem {
+    float: left;
+    display: inline;    
+    padding-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    letter-spacing: 2px;
+    color: #e76f51;
+}
+a:hover {
+    color: rgb(0, 0, 0);
+}
+
+.active {
+    color: rgb(0, 0, 0);
+}
+
+/*RECIPES*/
+#searchField {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+#searchRecipe {
+    margin: 0;
+    display: inline-block;
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    border-color: #e76f51;
+}
+
+.recipeBox {
+    background-color: #f5f1f1;
+    width: 32.33%;
+    float: left;
+    margin: 5px;
+    height: 250px;
+    border-radius: 5px;
+    position: relative;
+}
+.recipeBox div {
+    position: absolute;
+    bottom: 0;
+}
+
+.recipeBox h3 {
+    margin-left: 20px;
+}
+
+#search {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+/*ONE RECIPE*/
+#goBack {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+}
+#recipeBox {
+    background-color: #f5f1f1;
+    width: 800px;
+    margin: auto;
+    border-radius: 5px;  
+    margin-bottom: 40px;  
+}
+
+#recipeImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding-top: 20px;
+}
+
+#recipeBox h3 , #recipeBox p {
+    padding-left: 25px;
+}
+
+#instructionsBox {
+    display: block;
+
+}
+#ingredientsDiv {
+    float: left;
+    display: inline;
+    width: 100px;
+}
+#instructionsDiv {
+    display: inline;
+    float: right;
+    width: 620px;
+    padding-right: 25px;
+
+}
+#recipeButton {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#saveRecipe {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 30px;
+}
+.commentDiv {
+    background-color: #f5f1f1;
+    width: 800px;
+    margin: auto;
+    padding-top: 20px;
+
+}
+.commentForm {
+    display: block;
+    margin-left: 40px;
+}
+
+input#name {
+    width: 200px;
+
+}
+input#comment {
+    width: 600px;
+    height: 100px;
+    float: left;
+    display: inline;
+}
+.otherComments {
+    background-color: #e2e1e1;
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 600px;
+}
+
+.comment_h {
+    margin-left: 40px;;
+}
+
+/*UPLOAD*/
+#uploadDiv {
+    padding-left: 40px;
+}
+.label {
+    color: #e76f51;
+}
+#uploadDiv h2 {
+    color: #e76f51;
+}
+#title {
+    width: 400px;
+    height: 30px;
+    border-radius: 5px;
+}
+.input {
+    width: 500px;
+    height: 200px;
+    border-radius: 5px;
+}
+#image {
+    padding-top: 0;
+}
+#submit {
+    margin-top: 20px;
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/*MY PAGE*/
+#imageDiv {
+    margin-left: 120px;
+}
+#image {
+    width: 200px;
+    padding-top: 40px;
+}
+.mypageDiv {
+    color: #e76f51;
+    padding-left: 20px;
+    padding-bottom: 40px;
+    display: block;
+}
+
+.profile {
+    float: left;
+    display: inline;
+    padding-left: 130px;
+}
+
+.upload {
+    padding-left: 700px;
+    font-size: 20px;
+}
+.uploadButton {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.savedBox {
+    background-color: #f5f1f1;
+    width: 32.33%;
+    float: left;
+    margin: 5px;
+    height: 250px;
+    border-radius: 5px;
+    position: relative;
+}
+.savedBox div {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+}
+.savedBox h3 {
+    margin-left: 20px;
+
+    
+}
+/*LOGIN*/
+#loginForm {
+    margin: auto;
+    text-align: center;
+}
+.inputLogin {
+    width: 200px;
+    height: 30px;
+}
+#loginBtn {
+    width: 200px;
+    background-color: #e76f51;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/*FOOTER*/
+#footerbox {
+
+    height: 100px;
+    text-align: center;
+    font-size: 12px;
+}
+#navbar_footer {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.navItem_footer {
+    display: inline;    
+    padding-top: 10px;
+    font-size: 12px;
+}

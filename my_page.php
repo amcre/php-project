@@ -1,6 +1,7 @@
 <?php
  session_start();
  include "config.php";
+ include "header.php";
 ?>
 
 <!doctype html>
@@ -10,7 +11,7 @@
  <meta charset="utf-8" /> 
  <link rel="stylesheet" tyles="text/css" media="screen" href="css/style.css">
 </head> 
-  <body>
+  <body> <!--Ta bort bilden?-->
     <div id="imageDiv">
         <img id="image" src="img/persona.png">
     </div>
@@ -31,15 +32,16 @@
     $userId = $_SESSION["userId"];
 
     if ($_SESSION["username"] != "") {
+        echo "You are logged in as $user";
         echo $_SESSION['userip'];
         echo $_SERVER['REMOTE_ADDR'];
         if ($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']) {
-            session_unset();
-            session_destroy();
+            echo "ip adress is not correct";
             header("LOCATION: login.php");
         }
     } else {
         header("LOCATION: login.php");
+        echo "You are not logged in";
     }
 
 ?>
@@ -115,6 +117,9 @@
     
     $stmt->close();
 
+
+
+
     ?>
 
 </div>
@@ -122,3 +127,6 @@
 
   </body>
 </html>
+<?php
+include "footer.php";
+?>

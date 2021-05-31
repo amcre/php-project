@@ -1,6 +1,7 @@
 <?php
  session_start();
  include "config.php";
+ include "header.php";
 ?>
 
 <!doctype html>
@@ -83,7 +84,7 @@ if ($_GET['ida']) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "x-rapidapi-host: tasty.p.rapidapi.com",
-            "x-rapidapi-key: 69b4d33628msh948b836e6dd1e71p161975jsn3ffca358d60f"
+            "x-rapidapi-key: 6f7a6ca1f5msh18ba73f4a1cfd25p1257abjsn6a34745a13f4"
         ],
     ]);
 
@@ -138,7 +139,27 @@ if ($_GET['ida']) {
             </form>
         </div>
     </div>
+           
+    <div class="commentDiv">
+        <div>
+        <h3 class="comment_h">Leave a comment about the recipe!</h3>
+            <form class="commentForm" action=".php" method="POST">
+                <input name="name" id="commentName" type="text" placeholder="Your name..."><br><br>
+                <input name="comment" id="comment" type="text" placeholder="What do you think...">
+                <input id="saveRecipe" name="saveBtn" type="submit" value="PUBLISH COMMENT">
+            </form> 
+        </div> 
+        
+        <h3 class="comment_h">Comments:</h3>
+        <div class="otherComments">
+            
+            <div class="written_comment_name"><h4>name<h4></div>
+            <div class="written_comment_message"><p>text from comment<p></div>
+        </div>        
+    </div>
 
-    <!---ska läggas till kommentarsektion-->
   </body>
 </html>
+<?php
+include "footer.php";
+?>
