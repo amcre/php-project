@@ -10,7 +10,7 @@
  <meta charset="utf-8" /> 
  <link rel="stylesheet" tyles="text/css" media="screen" href="css/style.css">
 </head> 
-  <body> <!--Ta bort bilden?-->
+  <body>
     <div id="imageDiv">
         <img id="image" src="img/persona.png">
     </div>
@@ -31,16 +31,15 @@
     $userId = $_SESSION["userId"];
 
     if ($_SESSION["username"] != "") {
-        echo "You are logged in as $user";
         echo $_SESSION['userip'];
         echo $_SERVER['REMOTE_ADDR'];
         if ($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']) {
-            echo "ip adress is not correct";
+            session_unset();
+            session_destroy();
             header("LOCATION: login.php");
         }
     } else {
         header("LOCATION: login.php");
-        echo "You are not logged in";
     }
 
 ?>
@@ -71,7 +70,7 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "x-rapidapi-host: tasty.p.rapidapi.com",
-                "x-rapidapi-key: 75e932243fmshedc0c556d804bd0p11e5f6jsn391573816b46"
+                "x-rapidapi-key: 69b4d33628msh948b836e6dd1e71p161975jsn3ffca358d60f"
             ],
         ]);
     
@@ -115,9 +114,6 @@
         }
     
     $stmt->close();
-
-
-
 
     ?>
 

@@ -83,7 +83,7 @@ if ($_GET['ida']) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "x-rapidapi-host: tasty.p.rapidapi.com",
-            "x-rapidapi-key: 75e932243fmshedc0c556d804bd0p11e5f6jsn391573816b46"
+            "x-rapidapi-key: 69b4d33628msh948b836e6dd1e71p161975jsn3ffca358d60f"
         ],
     ]);
 
