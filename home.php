@@ -1,3 +1,7 @@
+<?php
+include "header.php";
+?>
+
 <!doctype html>
 <html>
 <head> 
@@ -46,3 +50,6 @@
 
   </body>
 </html>
+<?php
+include "footer.php";
+?>

@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$password = "root";
+$password = "";
 
 $conn = new mysqli($host, $user, $password);
 if ($conn->connect_error) {
@@ -20,7 +20,7 @@ if ($conn->query($db) === TRUE) {
   
 $host = "localhost";
 $user = "root";
-$password = "root";
+$password = "";
 $database = "recipeDB";
 
 $conn = mysqli_connect($host, $user, $password, $database);
