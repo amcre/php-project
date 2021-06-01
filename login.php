@@ -1,9 +1,8 @@
 <?php
 ini_set('session.cookie_httponly', true);
  session_start();
- $day = new DateTime('+1 day');
- setcookie('PHPSESSID', session_id(), $day->getTimeStamp(), '/', null, null, true);
  include "config.php";
+ include "header.php";
 ?>
 
 <!doctype html>

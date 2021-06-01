@@ -7,9 +7,9 @@ $user = $_SESSION["username"];
 $userId = $_SESSION["userId"];
 
 if ($_SESSION["username"] != "") {
-    echo "You are logged in as $user";
-    echo $_SESSION['userip'];
-    echo $_SERVER['REMOTE_ADDR'];
+    if (session_id() !== $_COOKIE['PHPSESSID']) {
+      header("LOCATION: login.php");
+  }
     if ($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']) {
         session_unset();
         session_destroy();
@@ -17,7 +17,6 @@ if ($_SESSION["username"] != "") {
     }
 } else {
     header("LOCATION: login.php");
-    echo "You are not logged in";
 }
 
 
@@ -28,12 +27,9 @@ if (isset($_POST['submit'])) {
     $instructions = $_POST['instructions'];
 
     //Prevent XSS
-    $title = htmlentities($title)
-    $title = mysqli_real_escape_string($db, $title);
-    $ingredients = htmlentities($ingredients)
-    $ingredients = mysqli_real_escape_string($db, $ingredients);
-    $instructions = htmlentities($instructions)
-    $instructions = mysqli_real_escape_string($db, $instructions);
+    $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    $ingredients = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    $instructions = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
   
     $filename = $_FILES["image"]["name"]; 
     $tempname = $_FILES["image"]["tmp_name"];     
@@ -49,6 +45,7 @@ if (isset($_POST['submit'])) {
       //Check filesize
       if (($_FILES['image']['size'] <= 20000000) && ($_FILES["image"]["size"] != 0)) {
         $query = "INSERT INTO `recipes` (title, ingredients, instructions, image, authorId) VALUES ('$title', '$ingredients', '$instructions', '$filename', '$userId')";
+        
         mysqli_query($db, $query); 
 
         if (move_uploaded_file($tempname, $folder))  {

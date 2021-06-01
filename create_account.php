@@ -1,9 +1,8 @@
 <?php
 ini_set('session.cookie_httponly', true);
  session_start();
- //$day = new DateTime('+1 day');
- //setcookie('PHPSESSID', session_id(), $day->getTimeStamp(), '/', null, null, true);
  include "config.php";
+ include "header.php";
 ?>
 
 <!doctype html>
@@ -36,7 +35,6 @@ ini_set('session.cookie_httponly', true);
         $password = MD5($password);
 
         $username = htmlentities($username);
-        $username = mysqli_real_escape_string($db, $username);
     
         $query = "INSERT INTO `user` (username, password) VALUES ('$username', '$password')";
     
