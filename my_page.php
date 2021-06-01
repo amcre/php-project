@@ -11,18 +11,18 @@
  <meta charset="utf-8" /> 
  <link rel="stylesheet" tyles="text/css" media="screen" href="css/style.css">
 </head> 
-  <body> <!--Ta bort bilden?-->
+  <body>
     <div id="imageDiv">
         <img id="image" src="img/persona.png">
     </div>
     <div class="mypageDiv">
         <div class="profile">
-            <h3 >@USER_NAME</h3>
+            <h3 ><?php echo $_SESSION['username'];?></h3>
             <h2>My saved recipes</h2>
         </div>
         <div class="upload">
             <h2>Upload your own recipe<br>for others to try!</h2>
-            <button class="uploadButton">UPLOAD</button>
+            <a href="upload_recipe.php" class="uploadButton">UPLOAD</a>
         </div>
     </div>
 
@@ -32,11 +32,12 @@
     $userId = $_SESSION["userId"];
 
     if ($_SESSION["username"] != "") {
-        echo "You are logged in as $user";
-        echo $_SESSION['userip'];
-        echo $_SERVER['REMOTE_ADDR'];
+        if (session_id() !== $_COOKIE['PHPSESSID']) {
+            header("LOCATION: login.php");
+        }
         if ($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']) {
-            echo "ip adress is not correct";
+            session_unset();
+            session_destroy();
             header("LOCATION: login.php");
         }
     } else {

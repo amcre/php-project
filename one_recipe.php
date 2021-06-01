@@ -26,6 +26,8 @@
 
     <?php
 
+    $username = $_SESSION['username'];
+
         if ($_GET['id']) {
             $recipeId = $_GET['id'];
         } else if ($_GET['ida']) {
@@ -84,7 +86,7 @@ if ($_GET['ida']) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "x-rapidapi-host: tasty.p.rapidapi.com",
-            "x-rapidapi-key: 6f7a6ca1f5msh18ba73f4a1cfd25p1257abjsn6a34745a13f4"
+            "x-rapidapi-key: 69b4d33628msh948b836e6dd1e71p161975jsn3ffca358d60f"
         ],
     ]);
 
@@ -143,8 +145,14 @@ if ($_GET['ida']) {
     <div class="commentDiv">
         <div>
         <h3 class="comment_h">Leave a comment about the recipe!</h3>
-            <form class="commentForm" action=".php" method="POST">
-                <input name="name" id="commentName" type="text" placeholder="Your name..."><br><br>
+            <form class="commentForm" action="includes/create_comment.php" method="POST">
+                    <?php 
+                    if ($_GET['id']) {
+                        echo "<input type='hidden' name='id' value='$recipeId'>";
+                    } else if ($_GET['ida']) {
+                        echo "<input type='hidden' name='ida' value='$recipeId'>";
+                    }
+                    ?>
                 <input name="comment" id="comment" type="text" placeholder="What do you think...">
                 <input id="saveRecipe" name="saveBtn" type="submit" value="PUBLISH COMMENT">
             </form> 
@@ -152,9 +160,28 @@ if ($_GET['ida']) {
         
         <h3 class="comment_h">Comments:</h3>
         <div class="otherComments">
+
+        <?php
+        
+        if ($_GET['id']) {
+            $query = "SELECT commentId, authorId, recipeId, comment FROM `comments` WHERE recipeId = $recipeId";
+        } else if ($_GET['ida']) {
+            $query = "SELECT commentId, authorId, recipeIdAPI, comment FROM `comments` WHERE recipeIdAPI = $recipeId";
+        }
+        
+        $stmt = $db->prepare($query);
+        $stmt->bind_result($commentId, $authorId, $recipeId, $comment);
+        $stmt->execute();
+        
+        while($stmt->fetch()) {
+        
+            echo "<div class='written_comment_message'><p>$comment<p></div>";        
+        
+        }
+        
+        ?>
             
-            <div class="written_comment_name"><h4>name<h4></div>
-            <div class="written_comment_message"><p>text from comment<p></div>
+
         </div>        
     </div>
 

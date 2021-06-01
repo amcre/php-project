@@ -24,10 +24,66 @@
     </div>
 
     <div class="recipeContainer">
+
+        <?php
+
+        if ($_GET['query'] == null) {
+            
+        $curl = curl_init();
+    
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "x-rapidapi-host: tasty.p.rapidapi.com",
+                "x-rapidapi-key: 69b4d33628msh948b836e6dd1e71p161975jsn3ffca358d60f"
+            ],
+        ]);
+    
+        $response = curl_exec($curl);
+        $jsonArrayResponse = json_decode($response, true);
+        $err = curl_error($curl);
+    
+        curl_close($curl);
+    
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            for ($i = 0; $i <= 20; $i++) {
+     
+                $imgName = $jsonArrayResponse[results][$i][thumbnail_url];
+                $recipeId = $jsonArrayResponse[results][$i][id];
+                $recipeTitle = $jsonArrayResponse[results][$i][name];
+
+
+                echo "<a href='one_recipe.php?ida=$recipeId'>";
+                    echo "<div style=\"background-image: url('$imgName'); background-repeat: no-repeat; background-size: cover;\" class='recipeBox'>";
+                        echo "<div>";
+                            echo "<h3>$recipeTitle</h3>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</a>";
+            }
+            
+        }    
+        }
+        
+        ?>
+
         <?php
         if(isset($_GET['search'])) {
             $search = $_GET['query'];
+
             $search = htmlspecialchars($search, ENT_QUOTES, 'UTF-8');
+            
+            $search = htmlentities($search);
+            $search = mysqli_real_escape_string($db, $search);
             
             $query = "SELECT * FROM `recipes` WHERE `title` LIKE '%$search%'";
         
@@ -38,7 +94,6 @@
             while($stmt->fetch()) {
                 $imgName = "<a href='one_recipe.php?id=$id'><img src='recipeImg/$img' ></a>";
                 $style = "background-image: url('recipeImg/$img')";
-                $test = "recipeImg/$img";
 
 
                 echo "<a href='one_recipe.php?id=$id'>";
@@ -48,7 +103,6 @@
                         echo "</div>";
                     echo "</div>";
                 echo "</a>";
-
                 
             }
         
@@ -86,13 +140,9 @@
                 echo "cURL Error #:" . $err;
             } else {
                 for ($i = 0; $i <= 20; $i++) {
-                    //echo $jsonArrayResponse[results][0][thumbnail_url];
                     $imgName = $jsonArrayResponse[results][$i][thumbnail_url];
                     $recipeId = $jsonArrayResponse[results][$i][id];
                     $recipeTitle = $jsonArrayResponse[results][$i][name];
-        
-                    //echo "<img src='$imgName' >";
-                    //echo "<a href='one_recipe.php?ida=$recipeId'><img src='$imgName' ></a>";
 
                     echo "<a href='one_recipe.php?ida=$recipeId'>";
                         echo "<div style=\"background-image: url('$imgName'); background-repeat: no-repeat; background-size: cover;\" class='recipeBox'>";
@@ -103,7 +153,6 @@
                     echo "</a>";
                 }
                 
-                //echo $jsonArrayResponse[results][0][thumbnail_url];
             }    
         
         

@@ -13,6 +13,9 @@ if ($_SESSION["username"] != "") {
     echo "You are logged in as $user";
     echo $_SESSION['userip'];
     echo $_SERVER['REMOTE_ADDR'];
+    if (session_id() !== $_COOKIE['PHPSESSID']) {
+        header("LOCATION: login.php");
+    }
     if ($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']) {
         session_unset();
         session_destroy();
@@ -20,7 +23,6 @@ if ($_SESSION["username"] != "") {
     }
 } else {
     header("LOCATION: login.php");
-    echo "You are not logged in";
 }
 
 
@@ -36,7 +38,6 @@ if ($_POST['id']) {
 <?php
 
     $userId = $_SESSION["userId"];
-    echo $userId;
 
     $query = "SELECT * FROM `userRecipes` WHERE `userId` = $userId";
 
